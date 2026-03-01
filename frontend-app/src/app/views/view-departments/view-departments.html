@@ -1,0 +1,34 @@
+<main>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Department Name</th><th>Department Id</th><th>Building Number</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (department of departmentService.departments(); track department.id) {
+                <tr>
+                    <td class="text-wrap" style="width: 15rem;">{{department.departmentName}}</td>
+                    <td class="text-break" style="width: 12rem;">{{department.id}}</td>
+                    <td>{{department.departmentBuildingNumber}}</td>
+                    <td>
+                        <button (click)="deleteDepartment(department.id)" class="btn btn-danger">Delete department</button>
+                        <button [routerLink]="['edit', department.id]" class="btn btn-warning ms-2">Edit department</button>
+                        <button [routerLink]="['/dep', department.id]" class="btn btn-secondary ms-2">Show scientists</button>
+                    </td>
+                </tr>
+            }
+            @empty {
+                <tr>brak danych</tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="inner-content">
+        <button routerLink="form" class="btn btn-secondary">Add department</button>
+        <div class="w-75 pt-3 m-auto">
+            <router-outlet />
+        </div>
+    </div>
+
+</main>

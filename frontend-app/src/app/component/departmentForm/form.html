@@ -1,0 +1,32 @@
+<section class="rounded-4 p-3 bg-dark text-light">
+    <h3>Add departments</h3>
+    
+    <form>
+    <div class="form-floating mb-3">
+        <input 
+            type="text" 
+            class="form-control" 
+            id="floatingName" 
+            name="depName" 
+            [(ngModel)]="newDepartment.departmentName" 
+            placeholder="Department Name"
+        >
+        <label for="floatingName">Department Name</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input 
+            type="text" 
+            class="form-control" 
+            id="floatingBuilding" 
+            name="depBuilding" 
+            [(ngModel)]="newDepartment.departmentBuildingNumber" 
+            placeholder="Building number"
+        >
+        <label for="floatingBuilding">Building number</label>
+    </div>
+    
+    <button (click)='onSubmit()' type="button" class="btn btn-success w-100">Add department</button>
+    <button routerLink="/deps" class="btn btn-danger w-100 mt-2">Close form</button>
+</form>
+</section>

@@ -1,0 +1,29 @@
+<section class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-light d-flex justify-content-between align-items-center">
+      <h3 class="h5 mb-0">Scientist Details</h3>
+      <span class="badge bg-light text-dark">ID: {{scientist().id}}</span>
+    </div>
+
+    <div class="card-body">
+      <h4 class="card-title mb-4">
+        {{scientist().firstName}} {{scientist().lastName}}
+      </h4>
+
+      <dl class="row">
+        
+        <dt class="col-sm-4 text-muted">Wiek:</dt>
+        <dd class="col-sm-8">{{scientist().age}} lat</dd>
+
+        <dt class="col-sm-4 text-muted">Stopień naukowy:</dt>
+        <dd class="col-sm-8">
+          <span class="badge bg-dark text-light">{{scientist().degree}}</span>
+        </dd>
+
+        <dt class="col-sm-4 text-muted">Wydział:</dt>
+        <dd class="col-sm-8">{{scientist().departmentName}}</dd>
+
+      </dl>
+    </div>
+  </div>
+</section>

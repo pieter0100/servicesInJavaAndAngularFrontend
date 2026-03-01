@@ -1,0 +1,57 @@
+<section>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Department Name</th><th>Department Id</th><th>Building Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="">
+                <td>{{department.departmentName}}</td>
+                <td>{{department.id}}</td>
+                <td>{{department.departmentBuildingNumber}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Id</th>
+                <th>Age</th>
+                <th>Degree</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (scientist of this.departmentService.scientists(); track scientist.id) {
+                <tr>
+                    <td>{{scientist.firstName}}</td>
+                    <td>{{scientist.lastName}}</td>
+                    <td>{{scientist.id}}</td>
+                    <td>{{scientist.age}}</td>
+                    <td>{{scientist.degree}}</td>
+                    <td>{{scientist.departmentName}}</td>
+                    <td>
+                        <button (click)="deleteScientist(scientist.id)" class="btn btn-danger">Delete</button>
+                        <button [routerLink]="['edit', scientist.id]" class="btn btn-warning ms-2">Edit</button>
+                        <button [routerLink]="['details', scientist.id]" class="btn btn-secondary ms-2">Details</button>
+                    </td>
+                </tr>
+            }
+            @empty {
+                <tr>brak danych</tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <button routerLink="form" class="btn btn-secondary mb-3">Add scientist</button>
+        <div class="w-75 justify-items-center container">
+            <router-outlet />
+        </div>
+    </div>
+</section>

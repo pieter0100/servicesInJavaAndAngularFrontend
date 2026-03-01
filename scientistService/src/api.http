@@ -1,0 +1,48 @@
+### api wydzialow -------------------------------------------------
+
+### Dodaj department
+POST http://localhost:8080/departments
+Content-Type: application/json
+
+{
+  "departmentName": "wydzial testowy",
+  "departmentBuildingNumber": 10
+}
+
+### Pobierz wszystkie departamenty
+GET http://localhost:8080/departments
+
+### Pobierz wybrany wydzial
+GET http://localhost:8080/departments/fe3e6021-a6a7-33d4-8f7b-dd06d000bba9
+
+### Pobierz wydzial ktory nie istnieje
+GET http://localhost:8080/departments/fe3e6021-a6a7-33d4-8f7b-dd06d000bba
+
+### Usun wydzial
+DELETE http://localhost:8080/departments/fe3e6021-a6a7-33d4-8f7b-dd06d000bba9
+
+### api pracownikow -------------------------------------------------
+
+### Pobierz pracowników
+GET http://localhost:8080/scientists
+
+### Pobierz pracownika (trzeba wybrac id)
+GET http://localhost:8080/scientists/06fa4922-60ba-42f7-8e92-e2d7e1569d00
+
+### Pobierz pracownika zle id
+GET http://localhost:8080/scientists/06fa4922-60ba-42f7-8e92-e2d7e1569d0
+
+### Dodaj pracownika
+POST http://localhost:8080/scientists
+Content-Type: application/json
+
+{
+  "firstName": "test",
+  "lastName": "test1",
+  "degree": "test",
+  "age": 41,
+  "departmentName": "Wydzial Elektroniki Teleinformatyki i Informatyki"
+}
+
+### Usun pracownika
+DELETE http://localhost:8080/scientists/c99d81ed-a9a1-46f8-a426-f92f7596620f

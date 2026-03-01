@@ -1,0 +1,76 @@
+services:
+  db-department:
+    image: postgres
+    container_name: postgres-department
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    networks:
+      - spring-net
+  
+  db-scientists:
+    image: postgres
+    container_name: postgres-scientists
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    networks:
+      - spring-net
+  
+  backend-department:
+    image: departmentservice
+    container_name: department-service
+    depends_on:
+      - db-department
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-department:5432/mydatabase
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8081:8081"
+    networks:
+        - spring-net
+  
+  backend-scientist:
+    image: scientistservice
+    depends_on:
+      - db-scientists
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-scientists:5432/mydatabase
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports: 
+      - "8082:8082"
+    networks:
+      - spring-net
+  
+  frontend:
+    image: frontendapp
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-department
+      - backend-scientist
+    networks:
+        - spring-net
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+    networks:
+      - spring-net
+      
+networks:
+  spring-net:
+   driver: bridge
+        

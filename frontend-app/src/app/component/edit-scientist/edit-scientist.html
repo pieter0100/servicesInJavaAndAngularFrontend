@@ -1,0 +1,64 @@
+<section class="rounded-4 p-3 bg-dark text-light">
+    <h3>Edit Scientist</h3>
+    
+    <form>
+    <div class="form-floating mb-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="floatingName" 
+                name="sciName" 
+                [(ngModel)]="scientist().firstName"
+                placeholder="Name"
+                required
+            >
+            <label for="floatingName" class="text-dark">Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="floatingSurname" 
+                name="sciSurname" 
+                [(ngModel)]="scientist().lastName"
+                placeholder="Surname"
+                required
+            >
+            <label for="floatingSurname" class="text-dark">Surname</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input 
+                type="number" 
+                class="form-control" 
+                id="floatingAge" 
+                name="sciAge" 
+                [(ngModel)]="scientist().age"
+                placeholder="Age"
+                required
+            >
+            <label for="floatingAge" class="text-dark">Age</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select 
+                class="form-select" 
+                id="floatingDegree" 
+                name="sciDegree" 
+                [(ngModel)]="scientist().degree"
+                required
+            >
+                <option value="" disabled selected>Select a degree...</option>
+                
+                <option value="Master">Master</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Professor">Professor</option>
+            </select>
+            <label for="floatingDegree" class="text-dark">Degree</label>
+        </div>
+
+    <button (click)='onSubmit()' type="button" class="btn btn-success w-100">Edit Scientist</button>
+    <button (click)="goBack()" class="btn btn-danger w-100 mt-2">Close form</button>
+</form>
+</section>
