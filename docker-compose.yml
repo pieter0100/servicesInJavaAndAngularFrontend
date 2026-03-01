@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   db-department:
-    image: postgres
+    image: postgres:15-alpine
     container_name: postgres-department
     environment:
       POSTGRES_DB: mydatabase
@@ -10,9 +12,9 @@ services:
       - "5432:5432"
     networks:
       - spring-net
-  
+
   db-scientists:
-    image: postgres
+    image: postgres:15-alpine
     container_name: postgres-scientists
     environment:
       POSTGRES_DB: mydatabase
@@ -22,9 +24,9 @@ services:
       - "5433:5432"
     networks:
       - spring-net
-  
+
   backend-department:
-    image: departmentservice
+    build: ./departmentService
     container_name: department-service
     depends_on:
       - db-department
@@ -36,10 +38,11 @@ services:
     ports:
       - "8081:8081"
     networks:
-        - spring-net
-  
+      - spring-net
+
   backend-scientist:
-    image: scientistservice
+    build: ./scientistService
+    container_name: scientist-service
     depends_on:
       - db-scientists
     environment:
@@ -47,30 +50,30 @@ services:
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    ports: 
+    ports:
       - "8082:8082"
     networks:
       - spring-net
-  
+
   frontend:
-    image: frontendapp
+    build: ./frontend-app
+    container_name: frontend-service
     ports:
       - "80:80"
     depends_on:
       - backend-department
       - backend-scientist
     networks:
-        - spring-net
+      - spring-net
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8090:8080
+      - "8090:8080"
     networks:
       - spring-net
-      
+
 networks:
   spring-net:
-   driver: bridge
-        
+    driver: bridge
